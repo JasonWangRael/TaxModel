@@ -11,5 +11,10 @@ package com.taxmodel.sheethandle;
  * 
  */
 public class T101Handle {
-
+	/**
+	 * Constructor: T101Handle
+	 */
+	public T101Handle() {
+		System.out.println("T101Handle constructed!");
+	}
 }

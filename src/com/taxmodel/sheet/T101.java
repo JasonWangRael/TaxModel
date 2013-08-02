@@ -11,5 +11,10 @@ package com.taxmodel.sheet;
  * 
  */
 public class T101 {
-
+	/**
+	 * Constructor: T101
+	 */
+	public T101() {
+		System.out.println("T101 constructed!");
+	}
 }
