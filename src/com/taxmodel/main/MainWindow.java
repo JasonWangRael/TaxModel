@@ -9,6 +9,8 @@ package com.taxmodel.main;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -20,6 +22,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import org.rickysun.swingsheet.CellPanel;
+
+import com.taxmodel.sheet.T101;
 
 /**
  * 
@@ -48,6 +52,7 @@ public class MainWindow extends JFrame {
 			public void run() {
 				try {
 					MainWindow frame = new MainWindow();
+
 					frame.setVisible(true);
 				}
 				catch (Exception e) {
@@ -64,7 +69,7 @@ public class MainWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize =
 				java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		setBounds(0, 0, screenSize.width - 5, screenSize.height - 80);
+		setBounds(0, 0, screenSize.width - 300, screenSize.height - 300);
 		// ------------------------------------------------------------------------------
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -73,6 +78,22 @@ public class MainWindow extends JFrame {
 		menuBar.add(newMenu);
 		// ------------------------------------------------------------------------------
 		tMenuItem = new JMenuItem("T101");
+		tMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				T101 t101 = new T101();
+				try {
+					UIManager
+							.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+				}
+				catch (ClassNotFoundException | InstantiationException
+						| IllegalAccessException
+						| UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
+				setContentPane(t101.getCellPanel());
+				SwingUtilities.updateComponentTreeUI(t101.getCellPanel());
+			}
+		});
 		newMenu.add(tMenuItem);
 		// ------------------------------------------------------------------------------
 		dataMenu = new JMenu("Data");
@@ -101,9 +122,8 @@ public class MainWindow extends JFrame {
 				| IllegalAccessException | UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
+		setContentPane(contentPane);
 		SwingUtilities.updateComponentTreeUI(this);
 		// contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
 	}
-
 }
