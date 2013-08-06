@@ -17,13 +17,33 @@ public class MyUtil {
 	public static void BatchSetCellStyle(CellModel cellModel,
 			CellStyle cellStyle,
 			int startCol,
-			int StartRow,
-			int EndCol,
-			int EndRow) {
-		for (int i = startCol; i <= EndCol; i++) {
-			for (int j = StartRow; j <= EndRow; j++) {
+			int startRow,
+			int endCol,
+			int endRow) {
+		for (int i = startCol; i <= endCol; i++) {
+			for (int j = startRow; j <= endRow; j++) {
 				cellModel.getElement(i, j).setStyle(cellStyle);
 			}
 		}
+	}
+
+	public static void SetOuterBorder(CellModel cellModel,
+			int lightStyle,
+			int startCol,
+			int startRow,
+			int endCol,
+			int endRow) {
+		// Set top
+		for (int i = startCol; i <= endCol; i++) {
+			cellModel.getElement(i, startRow).getStyle().setTopLine(lightStyle);
+			cellModel.getElement(i, endRow).getStyle()
+					.setBottomLine(lightStyle);
+		}
+
+		// Set right
+		for (int i = startRow; i <= endRow; i++) {
+			cellModel.getElement(endCol, i).getStyle().setRightLine(lightStyle);
+		}
+
 	}
 }

@@ -2,8 +2,8 @@
  * @author
  *         Jason.w
  * @description
- *              create date: 2013-8-2
- *              last modified: 2013-8-5
+ *              create date: 2013-8-6
+ *              last modified: 2013-8-6
  */
 package com.taxmodel.sheet;
 
@@ -18,16 +18,16 @@ import org.rickysun.swingsheet.DefaultCellModel;
 /**
  * 
  */
-public class T101 {
+public class T102 {
 
-	private CellPanel cellPanel;
-	private CellModel cellModel;
+	private CellPanel	cellPanel;
+	private CellModel	cellModel;
 
 
 	/**
-	 * Constructor: T101
+	 * Constructor: T102
 	 */
-	public T101() {
+	public T102() {
 		cellModel = new DefaultCellModel();
 
 		/*----------------------------------------------------------------------------*/
@@ -112,7 +112,7 @@ public class T101 {
 
 		/*----------------------------------------------------------------------------*/
 		// Fill the text
-		cellModel.getElement(0, 1).setValue("当期各税种申报情况表                    ");
+		cellModel.getElement(0, 1).setValue("基期各税种申报情况表                    ");
 
 		cellModel.getElement(0, 2).setValue("纳税人名称:");
 		cellModel.getElement(6, 2).setValue("所属日期:");
@@ -157,7 +157,7 @@ public class T101 {
 
 		/*----------------------------------------------------------------------------*/
 		// Set cell style
-		//Header
+		// Header
 		CellStyle headStyle = new CellStyle();
 		headStyle.setFontName("华文中宋");
 		headStyle.setFontSize(24);
@@ -177,7 +177,7 @@ public class T101 {
 		cellModel.getElement(0, 2).setStyle(headStyle1);
 		cellModel.getElement(6, 2).setStyle(headStyle1);
 		cellModel.getElement(12, 2).setStyle(headStyle1);
-		
+
 		// 小类标题
 		cellModel.getElement(0, 3).setStyle(headStyle2);
 		cellModel.getElement(1, 3).setStyle(headStyle2);
@@ -188,7 +188,7 @@ public class T101 {
 
 		cellPanel = new CellPanel();
 		cellPanel.setModel(cellModel);
-		System.out.println("T101 constructed!");
+		System.out.println("T102 constructed!");
 	}
 
 	/**

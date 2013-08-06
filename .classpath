@@ -3,5 +3,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/openspreadsheet-0.1.jar" sourcepath="lib/openspreadsheet-0.1_src.jar"/>
+	<classpathentry kind="lib" path="lib/jxl.jar" sourcepath="D:/User Data/58656/Desktop/PGM-EXCEL/jexcelapi/src">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/D:/User Data/58656/Desktop/PGM-EXCEL/jexcelapi/docs/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
