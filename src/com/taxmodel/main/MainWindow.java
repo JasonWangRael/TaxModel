@@ -94,10 +94,10 @@ public class MainWindow extends JFrame {
 		newMenuMenu_1 = new JMenu("1.各税种申报情况表");
 		newMenu.add(newMenuMenu_1);
 		// ------------------------------------------------------------------------------
-		t101MenuItem = new JMenuItem("T101");
+		t101MenuItem = new JMenuItem("当期");
 		newMenuMenu_1.add(t101MenuItem);
 		// ------------------------------------------------------------------------------
-		t102MenuItem = new JMenuItem("T102");
+		t102MenuItem = new JMenuItem("基期");
 		newMenuMenu_1.add(t102MenuItem);
 		t102MenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
