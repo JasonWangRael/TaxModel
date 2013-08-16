@@ -7,13 +7,15 @@
  */
 package com.taxmodel.sheethandle;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
 
+import org.rickysun.swingsheet.CellElement;
 import org.rickysun.swingsheet.CellModel;
 import org.rickysun.swingsheet.CellPanel;
 
 import com.taxmodel.sheet.T101;
+import com.taxmodel.util.MyUtil;
 
 /**
  * 
@@ -21,47 +23,30 @@ import com.taxmodel.sheet.T101;
 public class T101Handle {
 	private T101	t101;
 	private CellModel	cellModel;
+	private String		cellValue;		// 记录进入编辑前单元格的值
+	private CellElement	currentCell;	// 记录正在编辑的单元格
 
 	/**
 	 * Constructor: T101Handle
-	 * 
-	 * @wbp.parser.entryPoint
 	 */
 	public T101Handle() {
 		t101 = new T101();
 		cellModel = t101.getCellModel();
-		t101.getCellPanel().getGrid().addMouseListener(new MouseListener() {
 
+		//监听单元格值变更
+		t101.getCellPanel().getGrid().addContainerListener(new ContainerListener() {
 			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
+			public void componentRemoved(ContainerEvent e) {
+				if (!cellValue.equals(currentCell.getValue().toString()))
+					onCellValueChanged();
 			}
-
 			@Override
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
+			public void componentAdded(ContainerEvent e) {
+				currentCell = cellModel.getSelectElement()[0];
+				cellValue = currentCell.getValue().toString();
 			}
 		});
+
 		System.out.println("T101Handle constructed!");
 	}
 
@@ -69,7 +54,6 @@ public class T101Handle {
 	//
 	/**
 	 * @return the t101
-	 * @wbp.parser.entryPoint
 	 */
 	public T101 getT101() {
 		return t101;
@@ -78,7 +62,6 @@ public class T101Handle {
 	/**
 	 * @param t101
 	 *            the t101 to set
-	 * @wbp.parser.entryPoint
 	 */
 	public void setT101(T101 t101) {
 		this.t101 = t101;
@@ -87,9 +70,19 @@ public class T101Handle {
 	/**
 	 * @return T101.cellPanel
 	 * @description
-	 * @wbp.parser.entryPoint
 	 */
 	public CellPanel getCellPanel() {
 		return t101.getCellPanel();
+	}
+
+	/**
+	 * 
+	 * @description
+	 * 				单元格值变更触发函数
+	 */
+	public void onCellValueChanged() {
+		System.out.println("row: " + currentCell.getRow());
+		System.out.println("col: " + currentCell.getCol());
+		System.out.println("value: " + MyUtil.toDouble(currentCell.getValue()));
 	}
 }
