@@ -102,6 +102,7 @@ public class T101 {
 		cellStyle.setBottomLine(CellStyle.LS_SINGLE);
 		cellStyle.setLeftLine(CellStyle.LS_SINGLE);
 		cellStyle.setRightLine(CellStyle.LS_SINGLE);
+		
 		for (int i = 1; i < 18; i++) {
 			for (int j = 5; j < 18; j++) {
 				CellElement cellElement = new CellElement(i, j);
