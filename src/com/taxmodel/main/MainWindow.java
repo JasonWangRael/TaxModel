@@ -12,6 +12,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -53,6 +54,11 @@ public class MainWindow extends JFrame {
 	private JMenu				newMenuMenu_6;
 
 	/*----------------------------------------------------------------------------*/
+	//
+	private JFileChooser		fileChooser;
+	private String				currentSheet;
+
+	/*----------------------------------------------------------------------------*/
 	// All Handles
 	private T101Handle			t101Handle;
 	private T102Handle			t102Handle;
@@ -81,8 +87,7 @@ public class MainWindow extends JFrame {
 	 */
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Dimension screenSize =
-				java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds(0, 0, screenSize.width - 300, screenSize.height - 300);
 		// ------------------------------------------------------------------------------
 		menuBar = new JMenuBar();
@@ -98,10 +103,17 @@ public class MainWindow extends JFrame {
 		newMenuMenu_1.add(t101MenuItem);
 		// ------------------------------------------------------------------------------
 		t102MenuItem = new JMenuItem("基期");
+		// ------------------------------------------------------------------------------
+		fileChooser = new JFileChooser();
+
+
 		newMenuMenu_1.add(t102MenuItem);
 		t102MenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				t102Handle = new T102Handle();
+				// 设置相应系统属性
+				currentSheet = "t102";
+				fileChooser.setDialogTitle("请选择<各税种申报情况表>");
 
 				setContentPane(t102Handle.getCellPanel());
 				SwingUtilities.updateComponentTreeUI(t102Handle.getCellPanel());
@@ -110,6 +122,9 @@ public class MainWindow extends JFrame {
 		t101MenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				t101Handle = new T101Handle();
+				// 设置相应系统属性
+				currentSheet = "t101";
+				fileChooser.setDialogTitle("请选择<各税种申报情况表>");
 
 				setContentPane(t101Handle.getCellPanel());
 				SwingUtilities.updateComponentTreeUI(t101Handle.getCellPanel());
@@ -135,6 +150,17 @@ public class MainWindow extends JFrame {
 		menuBar.add(dataMenu);
 		// ------------------------------------------------------------------------------
 		loadMenuItem = new JMenuItem("Load");
+		// Load按钮事件处理
+		loadMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int returnVal = fileChooser.showOpenDialog(MainWindow.this);
+
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					System.out.println(currentSheet);
+					System.out.println(fileChooser.getSelectedFile().getName());
+				}
+			}
+		});
 		dataMenu.add(loadMenuItem);
 		// ------------------------------------------------------------------------------
 		exportMenuItem = new JMenuItem("Export");
@@ -150,11 +176,9 @@ public class MainWindow extends JFrame {
 		contentPane = new CellPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		try {
-			UIManager
-					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		}
-		catch (ClassNotFoundException | InstantiationException
-				| IllegalAccessException | UnsupportedLookAndFeelException e) {
+		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
 		setContentPane(contentPane);
